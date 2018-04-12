@@ -8,8 +8,10 @@ class Solution(object):
         if not nums:
             return []
         lens = len(nums)
-        for i in range(lens-1):
-            for j in range(i+1, lens):
-                temp = nums[i] + nums[j]
-                if temp == target:
-                    return [i,j]
+        dic = {}
+        for i in range(lens):
+            if nums[i] in dic.values():
+                return [nums.index(target - nums[i]), i]
+            else:
+                dic[nums[i]] = target - nums[i]
+                
