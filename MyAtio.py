@@ -8,15 +8,15 @@ class Solution(object):
         lens = len(str)
         if lens == 0:
             return 0
-        flag = 0
+        flag = 1
         numStr = ""
         if '0' <= str[0] <= '9':
             numStr += str[0]
         if str[0] < '0' or str[0] >'9':
             if str[0] == '-':
-                flag = 1
+                flag = -1
             elif str[0] == '+':
-                flag = 0
+                flag = 1
             else:
                 return 0
         for i in range(1, lens):
@@ -29,27 +29,19 @@ class Solution(object):
         if numLen == 0:
             return 0
         elif numLen > 10:
-            if flag == 1:
-                return -2147483648
-            else:
-                return 2147483647
+            pass
         else:
-            num = 0
-            tmp = 1
-            for i in numStr[::-1]:
-                tmp *= 10
-                num += int(i) * (tmp // 10)
+            num = int(numStr)
             if num > 2147483647:
-                if flag == 1:
-                    return -2147483648
-                else:
-                    return 2147483647
+                pass
             else:
-                if flag == 1:
-                    return -num
-                else:
-                    return num
+                return flag*num
+        if flag == -1:
+            return -2147483648
+        else:
+            return 2147483647
+
 
 a = Solution()
-b = a.myAtoi("  0000000000012345678")
+b = a.myAtoi("  -0000000000024154354312345678")
 print(b)
